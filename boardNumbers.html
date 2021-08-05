@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Board without snake ladder</h1>
+
+<div>
+    <div id="board" style="float:left"></div>
+    <div id="diceArea" style="float:left;margin:0 auto;">
+        <button onclick="onDiceClick()">Dice</button>
+    </div>
+</div>
+
+<script>
+    var currentValue = 0;
+
+    function draw() {
+        var number = 0;
+        const boardElem = document.getElementById("board");
+        for(var i = 10; i > 0; i--) {
+            const rowElem = document.createElement('div');
+            rowElem.className= "row";
+            number = 0;
+            for(var j = 0; j < 10; j++) {
+                const cellElem = document.createElement('div');
+                cellElem.style = "height:50px; width:50px; border:1px solid grey; display:inline-block";
+                cellElem.style.background =  (i+ j) % 2 == 0 ? "blue" : "green";
+                if (i % 2 == 0) {
+                    number = i * 10 - j;
+                    
+                } else {
+                    number = i * 10 - (9 - j);
+                }
+                console.log(number);
+                var generatedId = "id" + number;
+                cellElem.id=generatedId;
+                cellElem.textContent = number;
+                rowElem.appendChild(cellElem);
+            }
+            boardElem.appendChild(rowElem);
+        }
+    }
+
+
+draw();
+function highlightNumber(number){
+    var generatedId = "id" + number;
+    const elem = document.getElementById(generatedId);
+    elem.style.background = "red";
+}
+
+function onDiceClick(){
+    const max = 6;
+    const min = 1;
+    const diceValue =  Math.floor(Math.random() * (max - min + 1) + min);
+    alert(diceValue);
+    const boardElem = document.getElementById("board");
+    boardElem.textContent = "";
+    draw();
+    currentValue = diceValue + currentValue;
+    if(currentValue<= 100){
+        highlightNumber(currentValue);
+    }
+
+}
+
+
+</script>
+
+</body>
+</html>
