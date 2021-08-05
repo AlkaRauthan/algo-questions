@@ -28,4 +28,18 @@ function steps(n) {
     }
 }
 
+function stepsWithSpaces(n){
+    for(let row =1 ; row <= n ; row++){
+        let stair = "";
+        for(let col=1 ; col<= n ;col++){
+            if(col > row){
+                stair = stair + " ";
+            }else{
+                stair = stair + "#";
+            }
+        }
+        console.log(stair);
+    }
+}
+
 module.exports = steps;
