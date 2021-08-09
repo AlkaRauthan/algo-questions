@@ -42,7 +42,7 @@ function pyramidNew(n) {
         let str = "";
         let spacesToLeave = n - (row+1);
         for(let col=0; col< colNos; col++){
-            if(col < spacesToLeave || col > (colNos-spacesToLeave)){
+            if(col < spacesToLeave || col >= (colNos-spacesToLeave)){
                 str = str + "*";
             }else{
                 str = str + "#";
@@ -51,6 +51,29 @@ function pyramidNew(n) {
         console.log(str);
     }
 }
+
+function pyramidWithRecursion(n,row=0,str=""){
+    const colNos = n +(n-1);
+    const spacesToLeave = n - (row+1);
+
+    if(row === n){
+        return;
+    }
+    if(colNos <= str.length){
+        console.log(str);
+        return pyramidWithRecursion(n,row+1);
+    }
+
+    if(str.length < spacesToLeave || (str.length >= (colNos-spacesToLeave)) ){
+        str = str+ " ";
+    }else{
+        str = str+ "#";
+    }
+    pyramidWithRecursion(n,row,str)
+
+}
+pyramidWithRecursion(3);
+
 
 function pyramidWithRepeat(n){
     const colNos = n +(n-1);
