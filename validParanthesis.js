@@ -12,7 +12,7 @@ function validParanthesis(str){
   const closingBrackets = Object.keys(mapObj);
   const openingBrackets = Object.values(mapObj);
   
-  for(char of str){
+  for(let char of str){
   	if(openingBrackets.includes(char)){
     	stack.push(char);
     }else if(closingBrackets.includes(char) 
@@ -25,6 +25,6 @@ function validParanthesis(str){
   return stack.length === 0
 }
 
-const str = "([{}[])";
+const str = "({}[])";
 
 console.log(validParanthesis(str));
