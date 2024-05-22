@@ -22,5 +22,5 @@ class Queue {
         return this.array.shift();
     }
 }
-
+// do it with unshift and pop for add and remove respectively
 module.exports = Queue;
