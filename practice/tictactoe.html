@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .node {
+        border: 1px solid black;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+        font-size: 30px;
+      }
+      .row {
+        display: block;
+      }
+
+      .game-board {
+        width: 350px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    </style>
+    <script>
+      const board = document.querySelector(".game-board");
+      let nodes;
+      console.log(board);
+      let isPlayerO = true;
+
+      const winPatterns = [
+        [0, 1, 2],
+        [0, 3, 6],
+        [0, 4, 8],
+        [1, 4, 7],
+        [2, 5, 8],
+        [2, 4, 6],
+        [3, 4, 5],
+        [6, 7, 8],
+      ];
+
+      function drawNodes(n) {
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            const divElement = document.createElement("div");
+            divElement.classList.add("node");
+            board.appendChild(divElement);
+            divElement.addEventListener("click", (e) => {
+              onNodeClick(e);
+            });
+          }
+        }
+        nodes = document.querySelectorAll(".node");
+      }
+      drawNodes(3);
+
+      function onNodeClick(e) {
+        console.log("clicked", e.target);
+        const targetElement = e.target;
+        targetElement.textContent = isPlayerO ? "O" : "X";
+        targetElement.style.pointerEvents = "none";
+        isPlayerO = !isPlayerO;
+        checkWinner();
+      }
+
+      function resetGame() {
+        const nodes = document.querySelectorAll(".node");
+        nodes.forEach((node) => {
+          node.textContent = "";
+        });
+      }
+
+      function checkWinner() {
+        for (const pattern of winPatterns) {
+          const pos1 = nodes[pattern[0]].textContent;
+          const pos2 = nodes[pattern[1]].textContent;
+          const pos3 = nodes[pattern[2]].textContent;
+          if (pos1 && pos2 && pos3 && pos1 === pos2 && pos2 === pos3) {
+            alert("winner is" + nodes[pattern[0]].textContent);
+          }
+        }
+      }
+    </script>
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div class="game-board"></div>
+    <button onclick="resetGame()">Reset Game</button>
+  </body>
+</html>
