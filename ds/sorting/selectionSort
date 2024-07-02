@@ -1,0 +1,25 @@
+const array = [10, 100, 1, 2, 1, 40, 20, 30];
+
+
+function swap(arr, xIndex, yIndex){
+    var temp = arr[xIndex];
+    arr[xIndex] = arr[yIndex];
+    arr[yIndex] = temp;
+}
+
+function sorting(array){
+    let n = array.length;
+    for(let i =0 ; i < n-1 ; i++){
+        let minIndex = i
+        for(let j= i+1 ; j < n ;j++){
+            if(array[j] < array[minIndex]){
+                minIndex = j;
+            }
+        }
+        swap(array,minIndex,i)
+    }
+    console.log(array);
+}
+
+
+sorting(array);
